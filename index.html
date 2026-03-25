@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Code 速查表</title>
+  <meta name="description" content="一页掌握 Claude Code Telegram 接入、配对、后台运行与排障要点。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain"></div>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">CLAUDE CODE / QUICK REFERENCE</p>
+      <h1>Claude Code<br/>速查表</h1>
+      <p class="subtitle">把 Telegram 接入、配对、后台运行、异常处理，压缩成一页能随时翻的操作板。</p>
+      <div class="hero-actions">
+        <a href="#commands" class="btn btn-solid">直接看命令</a>
+        <a href="#flow" class="btn btn-ghost">看完整流程</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="terminal-dot"></div><div class="terminal-dot"></div><div class="terminal-dot"></div>
+      <pre>/plugin install telegram@claude-plugins-official
+/reload-plugins
+/telegram:configure &lt;BOT_TOKEN&gt;
+claude --channels plugin:telegram@claude-plugins-official</pre>
+    </div>
+  </header>
+
+  <main>
+    <section class="section intro-grid">
+      <article class="stat-card accent">
+        <span>3 分钟</span>
+        <p>从安装到手机可发消息</p>
+      </article>
+      <article class="stat-card">
+        <span>4 个核心动作</span>
+        <p>安装 → 建 Bot → 配 Token → 配对</p>
+      </article>
+      <article class="stat-card">
+        <span>1 个关键建议</span>
+        <p>用 tmux 保持后台常驻</p>
+      </article>
+    </section>
+
+    <section id="commands" class="section">
+      <div class="section-head">
+        <p class="kicker">COMMANDS</p>
+        <h2>最常用命令</h2>
+      </div>
+      <div class="command-grid">
+        <article class="command-card">
+          <h3>安装插件</h3>
+          <code>/plugin install telegram@claude-plugins-official</code>
+        </article>
+        <article class="command-card">
+          <h3>重载插件</h3>
+          <code>/reload-plugins</code>
+        </article>
+        <article class="command-card">
+          <h3>配置 Token</h3>
+          <code>/telegram:configure &lt;BOT_TOKEN&gt;</code>
+        </article>
+        <article class="command-card">
+          <h3>报错时重启</h3>
+          <code>claude --channels plugin:telegram@claude-plugins-official</code>
+        </article>
+      </div>
+    </section>
+
+    <section id="flow" class="section flow-wrap">
+      <div class="section-head">
+        <p class="kicker">FLOW</p>
+        <h2>完整接入流程</h2>
+      </div>
+      <div class="timeline">
+        <article class="step"><span>01</span><div><h3>安装 Telegram 插件</h3><p>在 Claude Code 中执行安装命令，完成后重载插件。</p></div></article>
+        <article class="step"><span>02</span><div><h3>在 BotFather 创建机器人</h3><p>执行 <code>/newbot</code>，获得 Bot Token。用户名需以 <code>bot</code> 结尾。</p></div></article>
+        <article class="step"><span>03</span><div><h3>配置 Token</h3><p>执行 <code>/telegram:configure &lt;BOT_TOKEN&gt;</code>。若报错，先用 channels 参数重启 Claude。</p></div></article>
+        <article class="step"><span>04</span><div><h3>完成配对</h3><p>去 Telegram 给机器人发一条消息，复制返回的配对命令，在终端执行并确认策略切换。</p></div></article>
+        <article class="step"><span>05</span><div><h3>设置后台运行</h3><p>推荐放进 tmux，避免终端关闭后机器人断线。</p></div></article>
+      </div>
+    </section>
+
+    <section class="section two-col">
+      <article class="panel warning">
+        <p class="kicker">RECOVERY</p>
+        <h2>机器人没反应？</h2>
+        <ul>
+          <li>确认 Claude 是用 <code>--channels plugin:telegram@claude-plugins-official</code> 启动的</li>
+          <li>重新执行 <code>/telegram:configure</code></li>
+          <li>再去 Telegram 给机器人发消息</li>
+          <li>拿到配对码后回终端执行</li>
+        </ul>
+      </article>
+      <article class="panel safe">
+        <p class="kicker">SECURITY</p>
+        <h2>安全与使用建议</h2>
+        <ul>
+          <li>Bot Token 不要外传</li>
+          <li>建议将 DM 策略切到 allowlist</li>
+          <li>电脑需保持开机，网络稳定</li>
+          <li>后台常驻优先用 tmux</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section sources">
+      <div class="section-head">
+        <p class="kicker">LINKS</p>
+        <h2>相关链接</h2>
+      </div>
+      <div class="link-list">
+        <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noreferrer">Claude Code 官方文档</a>
+        <a href="https://t.me/botfather" target="_blank" rel="noreferrer">Telegram BotFather</a>
+        <a href="https://openclaw.com" target="_blank" rel="noreferrer">OpenClaw 官网</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Made for fast recall · Editorial dark layout · Responsive single-page reference</p>
+  </footer>
+</body>
+</html>

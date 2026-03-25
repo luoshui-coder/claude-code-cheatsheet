@@ -3,303 +3,358 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Claude Code 速查表</title>
-  <meta name="description" content="Claude Code 速查表网页版：快捷键、斜杠命令、技巧、MCP、配置与 CLI 参数。" />
+  <title>Claude Code 速查表 · 网页版</title>
+  <meta name="description" content="高还原、高密度、前端审美重制的 Claude Code 图片速查表网页版。" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="topbar wrap">
-    <div>
-      <h1>Claude Code 速查表</h1>
-      <p>把图版速查表重制成可滚动、可复制、可移动端查看的网页版本。</p>
-    </div>
-    <div class="version">Claude Code v2.1.81<br><span>最后更新：2026/03/23</span></div>
-  </header>
+  <div class="page-shell">
+    <header class="hero wrap">
+      <div class="hero-left">
+        <p class="eyebrow">EDITORIAL REBUILD / HIGH-DENSITY REFERENCE</p>
+        <h1>Claude Code 速查表</h1>
+        <p class="desc">按图片原稿重制成网页：保留信息密度、色块逻辑与“工程操作板”气质，同时让它能在桌面与移动端真正可用。</p>
+      </div>
+      <div class="hero-right">
+        <div class="meta-chip">v2.1.81</div>
+        <div class="meta-text">最后更新：2026 / 03 / 23</div>
+      </div>
+    </header>
 
-  <section class="notice wrap">
-    <strong>⚠️ 近期提醒</strong>
-    <span>--bare 形态 = 最小化无头模式（无 hooks/LSP/插件）</span>
-    <span>--channels = 权限中枢 & MCP 推送消息</span>
-    <span>.effort 前置元数据用于控制思考强度</span>
-    <span>/fork /branch = 重命名分支</span>
-    <span>SendMessage 可做守护代理</span>
-  </section>
-
-  <main class="wrap board">
-    <section class="card blue">
-      <h2>⌨️ 键盘快捷键</h2>
-      <div class="subgroup">
-        <h3>常规控制</h3>
-        <ul>
-          <li><kbd>Ctrl</kbd><kbd>C</kbd> 取消输入/生成</li>
-          <li><kbd>Ctrl</kbd><kbd>D</kbd> 退出会话</li>
-          <li><kbd>Ctrl</kbd><kbd>L</kbd> 清屏</li>
-          <li><kbd>Ctrl</kbd><kbd>J</kbd> 切换到堆栈输出</li>
-          <li><kbd>Ctrl</kbd><kbd>R</kbd> 反向搜索历史</li>
-          <li><kbd>Ctrl</kbd><kbd>T</kbd> 在线思路中打开提示</li>
-          <li><kbd>Ctrl</kbd><kbd>B</kbd> 后台运行任务</li>
-          <li><kbd>Ctrl</kbd><kbd>V</kbd> 粘贴图片</li>
-          <li><kbd>Esc</kbd><kbd>Esc</kbd> 回退/撤销</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>模式切换</h3>
-        <ul>
-          <li><kbd>Shift</kbd><kbd>Tab</kbd> 循环切换权限模式</li>
-          <li><kbd>Alt</kbd><kbd>P</kbd> 切换提问</li>
-          <li><kbd>Alt</kbd><kbd>T</kbd> 切换思考模式</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>执行</h3>
-        <ul>
-          <li><kbd>\</kbd><kbd>Enter</kbd> 快捷执行</li>
-          <li><kbd>Ctrl</kbd><kbd>J</kbd> 按顺序执行</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>会话选择器</h3>
-        <ul>
-          <li><kbd>↑↓</kbd> 导航</li>
-          <li><kbd>↵</kbd> 展开/折叠</li>
-          <li><kbd>P</kbd> 预览</li>
-          <li><kbd>R</kbd> 重命名</li>
-          <li><kbd>/</kbd> 搜索</li>
-          <li><kbd>A</kbd> 所有项目</li>
-          <li><kbd>B</kbd> 当前分支</li>
-        </ul>
-      </div>
-      <div class="subgroup accent-cyan">
-        <h3>🔌 MCP 服务端</h3>
-        <ul>
-          <li><code>--transport http</code> 远程 HTTP（推荐）</li>
-          <li><code>--transport stdio</code> 本地进程</li>
-          <li><code>--transport sse</code> 远程 SSE</li>
-          <li>作用域：Local / Project / User</li>
-          <li><code>/mcp</code> 交互式界面</li>
-          <li><code>claude mcp list</code> 列出服务端</li>
-          <li><code>claude mcp serve</code> 作为服务暴露</li>
-        </ul>
-      </div>
+    <section class="urgent wrap">
+      <span class="urgent-label">重要更新</span>
+      <span>⚠️ <code>--bare</code> = 最小无头模式（无 hooks / LSP / 插件）</span>
+      <span><code>--channels</code> = 权限中枢 + MCP 推送消息</span>
+      <span><code>.effort</code> 前置元数据用于调努力度</span>
+      <span><code>/fork</code> / <code>/branch</code> = 分支对话</span>
+      <span><code>SendMessage</code> 可做守护代理</span>
     </section>
 
-    <section class="card purple">
-      <h2>⚡ 斜杠命令</h2>
-      <div class="subgroup">
-        <h3>会话</h3>
-        <ul>
-          <li><code>/clear</code> 清除对话</li>
-          <li><code>/compact [focus]</code> 压缩上下文</li>
-          <li><code>/resume</code> 恢复/切换会话</li>
-          <li><code>/branch [name]</code> 分支对话</li>
-          <li><code>/cost</code> 查看成本</li>
-          <li><code>/context</code> 可视化上下文</li>
-          <li><code>/diff</code> 变更差异预览</li>
-          <li><code>/export</code> 导出对话</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>配置</h3>
-        <ul>
-          <li><code>/config</code> 打开设置</li>
-          <li><code>/model [model]</code> 切换模型（+ 努力度）</li>
-          <li><code>/fast [on|off]</code> 切换快捷模式</li>
-          <li><code>/theme</code> 更改颜色主题</li>
-          <li><code>/permissions</code> 查看/更新权限</li>
-          <li><code>/effort [level]</code> 设置努力度</li>
-          <li><code>/color [color]</code> 设置提示栏颜色</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>工具</h3>
-        <ul>
-          <li><code>/init</code> 创建 CLAUDE.md</li>
-          <li><code>/memory</code> 编辑 CLAUDE.md 文件</li>
-          <li><code>/mcp</code> 管理 MCP 服务</li>
-          <li><code>/hooks</code> 管理钩子</li>
-          <li><code>/skills</code> 列出可用技能</li>
-          <li><code>/agents</code> 管理代理</li>
-          <li><code>/chrome</code> Chrome 集成</li>
-          <li><code>/reload-plugins</code> 热重载插件</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>特殊</h3>
-        <ul>
-          <li><code>/btw &lt;question&gt;</code> 附带提问</li>
-          <li><code>/plan [desc]</code> 计划模式</li>
-          <li><code>/loop [interval]</code> 周期性任务</li>
-          <li><code>/voice</code> 语音模式</li>
-          <li><code>/doctor</code> 诊断疑难问题</li>
-          <li><code>/rc</code> 启用配置控制</li>
-          <li><code>/pr-comments [PR]</code> 获取 PR 评论</li>
-          <li><code>/status</code> 使用监控</li>
-          <li><code>/insights</code> 分析会话报告</li>
-          <li><code>/desktop</code> 桌面应用</li>
-        </ul>
-      </div>
-      <div class="subgroup accent-orange">
-        <h3>🧠 记忆与文件</h3>
-        <ul>
-          <li><strong>CLAUDE.md</strong>：<code>./CLAUDE.md</code> / <code>~/.claude/CLAUDE.md</code></li>
-          <li>规则来源：<code>.claude/rules/*.md</code></li>
-          <li>自动记忆：<code>~/.claude/projects/&lt;project&gt;/memory/</code></li>
-          <li><code>MEMORY.md</code> + 主题文件自动加载</li>
-        </ul>
-      </div>
-    </section>
+    <main class="wrap board">
+      <section class="column tall">
+        <article class="panel sky">
+          <div class="panel-head"><h2>⌨️ 键盘快捷键</h2></div>
+          <div class="panel-body">
+            <div class="block">
+              <h3>常规控制</h3>
+              <ul>
+                <li><kbd>Ctrl</kbd><kbd>C</kbd> 取消输入 / 生成</li>
+                <li><kbd>Ctrl</kbd><kbd>D</kbd> 退出会话</li>
+                <li><kbd>Ctrl</kbd><kbd>L</kbd> 清屏</li>
+                <li><kbd>Ctrl</kbd><kbd>R</kbd> 搜索历史</li>
+                <li><kbd>Ctrl</kbd><kbd>J</kbd> 切换到堆栈输出</li>
+                <li><kbd>Ctrl</kbd><kbd>T</kbd> 打开内联提示 / 思路</li>
+                <li><kbd>Ctrl</kbd><kbd>B</kbd> 后台运行任务</li>
+                <li><kbd>Ctrl</kbd><kbd>V</kbd> 粘贴图片</li>
+                <li><kbd>Esc</kbd><kbd>Esc</kbd> 回退 / 撤销</li>
+              </ul>
+            </div>
+            <div class="block cols-2">
+              <div>
+                <h3>模式切换</h3>
+                <ul>
+                  <li><kbd>Shift</kbd><kbd>Tab</kbd> 权限模式轮换</li>
+                  <li><kbd>Alt</kbd><kbd>P</kbd> 切换提问</li>
+                  <li><kbd>Alt</kbd><kbd>T</kbd> 切换思考深度</li>
+                </ul>
+              </div>
+              <div>
+                <h3>执行</h3>
+                <ul>
+                  <li><kbd>\</kbd><kbd>Enter</kbd> 快捷执行</li>
+                  <li><kbd>Ctrl</kbd><kbd>J</kbd> 顺序执行</li>
+                </ul>
+              </div>
+            </div>
+            <div class="block">
+              <h3>会话选择器</h3>
+              <ul class="mini-grid">
+                <li><kbd>↑↓</kbd> 导航</li>
+                <li><kbd>↵</kbd> 展开 / 折叠</li>
+                <li><kbd>P</kbd> 预览</li>
+                <li><kbd>R</kbd> 重命名</li>
+                <li><kbd>/</kbd> 搜索</li>
+                <li><kbd>A</kbd> 所有项目</li>
+                <li><kbd>B</kbd> 当前分支</li>
+              </ul>
+            </div>
+          </div>
+        </article>
 
-    <section class="card red">
-      <h2>🧰 工作流与技巧</h2>
-      <div class="subgroup">
-        <h3>计划模式</h3>
-        <ul>
-          <li><kbd>Shift</kbd><kbd>Tab</kbd>：Normal → Auto → Plan</li>
-          <li><code>--permission-mode plan</code> 计划模式启动</li>
-          <li><code>ultrathink</code>：当前轮次最大努力度</li>
-          <li><kbd>Alt</kbd><kbd>T</kbd>：快提/平衡/深入</li>
-          <li><kbd>Ctrl</kbd><kbd>O</kbd>：查看思考</li>
-          <li><code>/effort low · med · high</code></li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>Git Worktree</h3>
-        <ul>
-          <li><code>--worktree name</code> 每个功能独立分支</li>
-          <li><code>isolation: worktree</code> 让代理跑在独立 worktree</li>
-          <li><code>sparsePaths</code> 仅检出所需目录</li>
-          <li><code>/batch</code> 自动创建 worktrees</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>语音模式</h3>
-        <ul>
-          <li><code>/voice</code> 启用语音对话</li>
-          <li><kbd>Space</kbd>（hold）录音，释放发送</li>
-          <li>20+ 语言：EN/ES/FR/DE/CZ/PL…</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>上下文管理</h3>
-        <ul>
-          <li><code>/context</code> 用量 + 优化建议</li>
-          <li><code>/compact [focus]</code> 智能压缩</li>
-          <li><code>Auto-compact</code> 95% 自动触发</li>
-          <li>1M context / Opus 4.6 (Max/Team/Ent)</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>会话/SDK</h3>
-        <ul>
-          <li><code>claude -c</code> 继续上次对话</li>
-          <li><code>claude -r "name"</code> 按名称恢复</li>
-          <li><code>/btw</code> 无上下文开新聊</li>
-          <li><code>claude -p "query"</code> 非交互式</li>
-          <li><code>--output-format json</code> 结构化输出</li>
-          <li><code>cat file | claude -p</code> 管道输入</li>
-        </ul>
-      </div>
-      <div class="subgroup accent-orange">
-        <h3>📦 配置与环境</h3>
-        <ul>
-          <li><code>~/.claude/settings.json</code> 用户设置</li>
-          <li><code>.claude/settings.json</code> 项目设置</li>
-          <li><code>.claude/settings.local.json</code> 本地设置</li>
-          <li><code>.mcp.json</code> 项目 MCP 服务</li>
-          <li><code>ANTHROPIC_API_KEY</code> / <code>ANTHROPIC_MODEL</code></li>
-          <li><code>CLAUDE_CODE_EFFORT_LEVEL</code></li>
-          <li><code>MAX_THINKING_TOKENS</code></li>
-        </ul>
-      </div>
-    </section>
+        <article class="panel aqua inset-top">
+          <div class="panel-head"><h2>🔌 MCP 服务端</h2></div>
+          <div class="panel-body">
+            <div class="block">
+              <h3>传输类型</h3>
+              <ul>
+                <li><code>--transport http</code> 远程 HTTP（推荐）</li>
+                <li><code>--transport stdio</code> 本地子进程</li>
+                <li><code>--transport sse</code> SSE 传输</li>
+              </ul>
+            </div>
+            <div class="block cols-2">
+              <div>
+                <h3>作用域</h3>
+                <ul>
+                  <li>Local</li>
+                  <li>Project</li>
+                  <li>User</li>
+                </ul>
+              </div>
+              <div>
+                <h3>常用操作</h3>
+                <ul>
+                  <li><code>/mcp</code> 交互界面</li>
+                  <li><code>claude mcp list</code></li>
+                  <li><code>claude mcp serve</code></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
 
-    <section class="card green">
-      <h2>🧩 技能与代理</h2>
-      <div class="subgroup">
-        <h3>内置技能</h3>
-        <ul>
-          <li><code>/simplify</code> 代码审查（3 个并行代理）</li>
-          <li><code>/batch</code> 大规模并行修改</li>
-          <li><code>/debug [desc]</code> 调试日志排查问题</li>
-          <li><code>/loop [interval]</code> 周期性调度任务</li>
-          <li><code>/claude-api</code> 加载 API / SDK 参考</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>自定义技能</h3>
-        <ul>
-          <li><code>.claude/skills/&lt;name&gt;/</code> 项目技能</li>
-          <li><code>~/.claude/skills/&lt;name&gt;/</code> 个人技能</li>
-          <li><code>description</code> 自动调用触发器</li>
-          <li><code>allowed-tools</code> 限制权限</li>
-          <li><code>model</code> 覆盖技能模型</li>
-          <li><code>effort</code> 覆盖努力度</li>
-          <li><code>context: fork</code> 子代理独立记忆</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>内置代理</h3>
-        <ul>
-          <li><strong>Explore</strong> 快速只读</li>
-          <li><strong>Plan</strong> 计划模式研究</li>
-          <li><strong>General</strong> 主流程</li>
-          <li><strong>Bash</strong> 终端独立上下文</li>
-        </ul>
-      </div>
-      <div class="subgroup">
-        <h3>代理覆盖参数</h3>
-        <ul>
-          <li><code>permissionMode</code> default/acceptEdits/dontAsk/plan</li>
-          <li><code>isolation</code> worktree / git worktree</li>
-          <li><code>memory</code> user|project 持久化记忆</li>
-          <li><code>background: true</code> 后台任务</li>
-          <li><code>maxTurns</code> 限制轮次</li>
-          <li><code>SendMessage</code> 唤起代理（替代 resume）</li>
-        </ul>
-      </div>
-    </section>
+      <section class="column">
+        <article class="panel violet">
+          <div class="panel-head"><h2>⚡ 斜杠命令</h2></div>
+          <div class="panel-body dense">
+            <div class="block">
+              <h3>会话命令</h3>
+              <ul>
+                <li><code>/clear</code> 清除对话</li>
+                <li><code>/compact [focus]</code> 压缩上下文</li>
+                <li><code>/resume</code> 恢复会话</li>
+                <li><code>/branch [name]</code> 分支对话</li>
+                <li><code>/context</code> 查看上下文</li>
+                <li><code>/cost</code> 查看成本</li>
+                <li><code>/diff</code> 查看变更</li>
+                <li><code>/export</code> 导出对话</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>配置命令</h3>
+              <ul>
+                <li><code>/config</code> 打开设置</li>
+                <li><code>/model [model]</code> 切模型</li>
+                <li><code>/fast [on|off]</code> 快速模式</li>
+                <li><code>/theme</code> 主题颜色</li>
+                <li><code>/permissions</code> 权限管理</li>
+                <li><code>/effort [level]</code> 思考强度</li>
+                <li><code>/color [color]</code> 提示栏颜色</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>工具命令</h3>
+              <ul>
+                <li><code>/init</code> 创建 CLAUDE.md</li>
+                <li><code>/memory</code> 编辑记忆文件</li>
+                <li><code>/mcp</code> 管理 MCP</li>
+                <li><code>/hooks</code> 管理 hooks</li>
+                <li><code>/skills</code> 列出技能</li>
+                <li><code>/agents</code> 管理代理</li>
+                <li><code>/chrome</code> Chrome 集成</li>
+                <li><code>/reload-plugins</code> 重新加载插件</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>特殊命令</h3>
+              <ul>
+                <li><code>/btw &lt;question&gt;</code> 另开轻问</li>
+                <li><code>/plan [desc]</code> 进入计划模式</li>
+                <li><code>/loop [interval]</code> 周期任务</li>
+                <li><code>/voice</code> 语音模式</li>
+                <li><code>/doctor</code> 诊断问题</li>
+                <li><code>/pr-comments [PR]</code> 看 PR 评论</li>
+                <li><code>/status</code> 状态监控</li>
+                <li><code>/insights</code> 会话洞察</li>
+              </ul>
+            </div>
+          </div>
+        </article>
 
-    <section class="card slate cli-card">
-      <h2>🖥️ CLI 与标志</h2>
-      <div class="columns two">
-        <ul>
-          <li><code>claude</code> 交互式</li>
-          <li><code>claude -q</code> 带提示</li>
-          <li><code>claude -p</code> 无头模式</li>
-          <li><code>claude -c</code> 继续上次</li>
-          <li><code>claude -r</code> 恢复</li>
-          <li><code>claude update</code> 更新</li>
-        </ul>
-        <ul>
-          <li><code>--model</code> 设模型</li>
-          <li><code>-w</code> Git worktree</li>
-          <li><code>-n / --name</code> 会话名</li>
-          <li><code>--add-dir</code> 加目录</li>
-          <li><code>--agent</code> 使用代理</li>
-          <li><code>--allowedTools</code> 预批准</li>
-          <li><code>--output-format</code> json/stream</li>
-          <li><code>--json-schema</code> 结构化</li>
-          <li><code>--max-turns</code> 限制轮次</li>
-          <li><code>--max-budget-usd</code> 费用上限</li>
-          <li><code>--console</code> Anthropic Console 认证</li>
-          <li><code>--verbose</code> 详细模式</li>
-          <li><code>--bare</code> 最小化无头</li>
-          <li><code>--channels</code> 权限中枢 / MCP 推送</li>
-          <li><code>--remote</code> Web 会话</li>
-          <li><code>--chrome</code> Chrome</li>
-        </ul>
-      </div>
-    </section>
-  </main>
+        <article class="panel amber inset-top">
+          <div class="panel-head"><h2>🧠 记忆与文件</h2></div>
+          <div class="panel-body">
+            <div class="block">
+              <ul>
+                <li><code>./CLAUDE.md</code> 项目级指令</li>
+                <li><code>~/.claude/CLAUDE.md</code> 用户级指令</li>
+                <li><code>.claude/rules/*.md</code> 规则文件</li>
+                <li><code>~/.claude/projects/&lt;project&gt;/memory/</code> 自动记忆</li>
+                <li><code>MEMORY.md</code> + 主题文件自动加载</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </section>
 
-  <footer class="footer wrap">
-    <div class="envline">
-      <span>权限模式：default / acceptEdits / plan / dontAsk / bypassPermissions</span>
-      <span>常见环境变量：ANTHROPIC_API_KEY / ANTHROPIC_MODEL / CLAUDE_CODE_EFFORT_LEVEL / MAX_THINKING_TOKENS / CLAUDE_CODE_MAX_OUTPUT_TOKENS / CLAUDE_CODE_DISABLE_CRON</span>
-    </div>
-  </footer>
+      <section class="column">
+        <article class="panel coral">
+          <div class="panel-head"><h2>🧰 工作流与技巧</h2></div>
+          <div class="panel-body dense">
+            <div class="block">
+              <h3>计划模式 / 思考强度</h3>
+              <ul>
+                <li><kbd>Shift</kbd><kbd>Tab</kbd>：Normal → Auto → Plan</li>
+                <li><code>--permission-mode plan</code> 计划模式启动</li>
+                <li><code>ultrathink</code> 当轮最大努力度</li>
+                <li><kbd>Alt</kbd><kbd>T</kbd> 快 / 平衡 / 深入</li>
+                <li><kbd>Ctrl</kbd><kbd>O</kbd> 查看思考</li>
+                <li><code>/effort low | med | high</code></li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>Git Worktree</h3>
+              <ul>
+                <li><code>--worktree name</code> 每个功能独立分支</li>
+                <li><code>isolation: worktree</code> 隔离代理</li>
+                <li><code>sparsePaths</code> 只检出必要目录</li>
+                <li><code>/batch</code> 自动创建 worktrees</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>语音模式</h3>
+              <ul>
+                <li><code>/voice</code> 开启语音</li>
+                <li><kbd>Space</kbd> 长按录音，松开发送</li>
+                <li>支持 20+ 语言</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>上下文管理</h3>
+              <ul>
+                <li><code>/context</code> 用量与建议</li>
+                <li><code>/compact [focus]</code> 智能压缩</li>
+                <li>95% 自动 compact</li>
+                <li>1M context（Opus 4.6 Max/Team/Ent）</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>会话 / SDK</h3>
+              <ul>
+                <li><code>claude -c</code> 延续上次对话</li>
+                <li><code>claude -r "name"</code> 恢复命名会话</li>
+                <li><code>/btw</code> 轻量新会话</li>
+                <li><code>claude -p "query"</code> 非交互模式</li>
+                <li><code>--output-format json</code> 结构化输出</li>
+                <li><code>cat file | claude -p</code> 管道输入</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel amber inset-top">
+          <div class="panel-head"><h2>📦 配置与环境</h2></div>
+          <div class="panel-body">
+            <ul>
+              <li><code>~/.claude/settings.json</code> 用户设置</li>
+              <li><code>.claude/settings.json</code> 项目设置</li>
+              <li><code>.claude/settings.local.json</code> 本地设置</li>
+              <li><code>.mcp.json</code> 项目 MCP 服务</li>
+              <li><code>ANTHROPIC_API_KEY</code> / <code>ANTHROPIC_MODEL</code></li>
+              <li><code>CLAUDE_CODE_EFFORT_LEVEL</code></li>
+              <li><code>MAX_THINKING_TOKENS</code></li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <section class="column">
+        <article class="panel mint">
+          <div class="panel-head"><h2>🧩 技能与代理</h2></div>
+          <div class="panel-body dense">
+            <div class="block">
+              <h3>内置技能</h3>
+              <ul>
+                <li><code>/simplify</code> 代码审查（并行代理）</li>
+                <li><code>/batch</code> 大规模并行修改</li>
+                <li><code>/debug [desc]</code> 日志调试</li>
+                <li><code>/loop [interval]</code> 周期任务</li>
+                <li><code>/claude-api</code> 加载 API / SDK 参考</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>自定义技能</h3>
+              <ul>
+                <li><code>.claude/skills/&lt;name&gt;/</code> 项目技能</li>
+                <li><code>~/.claude/skills/&lt;name&gt;/</code> 个人技能</li>
+                <li><code>description</code> 自动触发说明</li>
+                <li><code>allowed-tools</code> 限制工具</li>
+                <li><code>model</code> 指定技能模型</li>
+                <li><code>effort</code> 覆盖努力度</li>
+                <li><code>context: fork</code> 子代理上下文分离</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>内置代理</h3>
+              <ul>
+                <li><strong>Explore</strong> 快速只读探索</li>
+                <li><strong>Plan</strong> 计划模式研究</li>
+                <li><strong>General</strong> 通用执行</li>
+                <li><strong>Bash</strong> 终端专用上下文</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>代理覆盖</h3>
+              <ul>
+                <li><code>permissionMode</code> default / acceptEdits / dontAsk / plan</li>
+                <li><code>isolation</code> worktree / git worktree</li>
+                <li><code>memory</code> user / project</li>
+                <li><code>background: true</code> 后台任务</li>
+                <li><code>maxTurns</code> 限制轮次</li>
+                <li><code>SendMessage</code> 唤起守护代理</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel slate inset-top">
+          <div class="panel-head"><h2>🖥️ CLI 与标志</h2></div>
+          <div class="panel-body cli-list">
+            <div class="cli-col">
+              <ul>
+                <li><code>claude</code> 交互式</li>
+                <li><code>claude -q</code> 带提示启动</li>
+                <li><code>claude -p</code> 无头模式</li>
+                <li><code>claude -c</code> 继续上次</li>
+                <li><code>claude -r</code> 恢复会话</li>
+                <li><code>claude update</code> 更新 CLI</li>
+              </ul>
+            </div>
+            <div class="cli-col">
+              <ul>
+                <li><code>--model</code> 设模型</li>
+                <li><code>-w</code> Git worktree</li>
+                <li><code>-n / --name</code> 命名会话</li>
+                <li><code>--add-dir</code> 添加目录</li>
+                <li><code>--agent</code> 指定代理</li>
+                <li><code>--allowedTools</code> 预批准工具</li>
+                <li><code>--output-format</code> json / stream</li>
+                <li><code>--json-schema</code> 结构化模式</li>
+                <li><code>--max-turns</code> 限制轮次</li>
+                <li><code>--max-budget-usd</code> 成本上限</li>
+                <li><code>--console</code> Console 认证</li>
+                <li><code>--verbose</code> 详细输出</li>
+                <li><code>--bare</code> 最小无头</li>
+                <li><code>--channels</code> 权限中枢 / MCP 推送</li>
+                <li><code>--remote</code> Web 会话</li>
+                <li><code>--chrome</code> Chrome 集成</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer wrap">
+      <div class="footer-bar">
+        <span>权限模式：default / acceptEdits / plan / dontAsk / bypassPermissions</span>
+        <span>环境变量：ANTHROPIC_API_KEY · ANTHROPIC_MODEL · CLAUDE_CODE_EFFORT_LEVEL · MAX_THINKING_TOKENS · CLAUDE_CODE_MAX_OUTPUT_TOKENS · CLAUDE_CODE_DISABLE_CRON</span>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>

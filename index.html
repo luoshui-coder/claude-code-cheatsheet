@@ -4,126 +4,302 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Claude Code 速查表</title>
-  <meta name="description" content="一页掌握 Claude Code Telegram 接入、配对、后台运行与排障要点。" />
+  <meta name="description" content="Claude Code 速查表网页版：快捷键、斜杠命令、技巧、MCP、配置与 CLI 参数。" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="grain"></div>
-  <header class="hero">
-    <div class="hero-inner">
-      <p class="eyebrow">CLAUDE CODE / QUICK REFERENCE</p>
-      <h1>Claude Code<br/>速查表</h1>
-      <p class="subtitle">把 Telegram 接入、配对、后台运行、异常处理，压缩成一页能随时翻的操作板。</p>
-      <div class="hero-actions">
-        <a href="#commands" class="btn btn-solid">直接看命令</a>
-        <a href="#flow" class="btn btn-ghost">看完整流程</a>
-      </div>
+  <header class="topbar wrap">
+    <div>
+      <h1>Claude Code 速查表</h1>
+      <p>把图版速查表重制成可滚动、可复制、可移动端查看的网页版本。</p>
     </div>
-    <div class="hero-card">
-      <div class="terminal-dot"></div><div class="terminal-dot"></div><div class="terminal-dot"></div>
-      <pre>/plugin install telegram@claude-plugins-official
-/reload-plugins
-/telegram:configure &lt;BOT_TOKEN&gt;
-claude --channels plugin:telegram@claude-plugins-official</pre>
-    </div>
+    <div class="version">Claude Code v2.1.81<br><span>最后更新：2026/03/23</span></div>
   </header>
 
-  <main>
-    <section class="section intro-grid">
-      <article class="stat-card accent">
-        <span>3 分钟</span>
-        <p>从安装到手机可发消息</p>
-      </article>
-      <article class="stat-card">
-        <span>4 个核心动作</span>
-        <p>安装 → 建 Bot → 配 Token → 配对</p>
-      </article>
-      <article class="stat-card">
-        <span>1 个关键建议</span>
-        <p>用 tmux 保持后台常驻</p>
-      </article>
-    </section>
+  <section class="notice wrap">
+    <strong>⚠️ 近期提醒</strong>
+    <span>--bare 形态 = 最小化无头模式（无 hooks/LSP/插件）</span>
+    <span>--channels = 权限中枢 & MCP 推送消息</span>
+    <span>.effort 前置元数据用于控制思考强度</span>
+    <span>/fork /branch = 重命名分支</span>
+    <span>SendMessage 可做守护代理</span>
+  </section>
 
-    <section id="commands" class="section">
-      <div class="section-head">
-        <p class="kicker">COMMANDS</p>
-        <h2>最常用命令</h2>
-      </div>
-      <div class="command-grid">
-        <article class="command-card">
-          <h3>安装插件</h3>
-          <code>/plugin install telegram@claude-plugins-official</code>
-        </article>
-        <article class="command-card">
-          <h3>重载插件</h3>
-          <code>/reload-plugins</code>
-        </article>
-        <article class="command-card">
-          <h3>配置 Token</h3>
-          <code>/telegram:configure &lt;BOT_TOKEN&gt;</code>
-        </article>
-        <article class="command-card">
-          <h3>报错时重启</h3>
-          <code>claude --channels plugin:telegram@claude-plugins-official</code>
-        </article>
-      </div>
-    </section>
-
-    <section id="flow" class="section flow-wrap">
-      <div class="section-head">
-        <p class="kicker">FLOW</p>
-        <h2>完整接入流程</h2>
-      </div>
-      <div class="timeline">
-        <article class="step"><span>01</span><div><h3>安装 Telegram 插件</h3><p>在 Claude Code 中执行安装命令，完成后重载插件。</p></div></article>
-        <article class="step"><span>02</span><div><h3>在 BotFather 创建机器人</h3><p>执行 <code>/newbot</code>，获得 Bot Token。用户名需以 <code>bot</code> 结尾。</p></div></article>
-        <article class="step"><span>03</span><div><h3>配置 Token</h3><p>执行 <code>/telegram:configure &lt;BOT_TOKEN&gt;</code>。若报错，先用 channels 参数重启 Claude。</p></div></article>
-        <article class="step"><span>04</span><div><h3>完成配对</h3><p>去 Telegram 给机器人发一条消息，复制返回的配对命令，在终端执行并确认策略切换。</p></div></article>
-        <article class="step"><span>05</span><div><h3>设置后台运行</h3><p>推荐放进 tmux，避免终端关闭后机器人断线。</p></div></article>
-      </div>
-    </section>
-
-    <section class="section two-col">
-      <article class="panel warning">
-        <p class="kicker">RECOVERY</p>
-        <h2>机器人没反应？</h2>
+  <main class="wrap board">
+    <section class="card blue">
+      <h2>⌨️ 键盘快捷键</h2>
+      <div class="subgroup">
+        <h3>常规控制</h3>
         <ul>
-          <li>确认 Claude 是用 <code>--channels plugin:telegram@claude-plugins-official</code> 启动的</li>
-          <li>重新执行 <code>/telegram:configure</code></li>
-          <li>再去 Telegram 给机器人发消息</li>
-          <li>拿到配对码后回终端执行</li>
+          <li><kbd>Ctrl</kbd><kbd>C</kbd> 取消输入/生成</li>
+          <li><kbd>Ctrl</kbd><kbd>D</kbd> 退出会话</li>
+          <li><kbd>Ctrl</kbd><kbd>L</kbd> 清屏</li>
+          <li><kbd>Ctrl</kbd><kbd>J</kbd> 切换到堆栈输出</li>
+          <li><kbd>Ctrl</kbd><kbd>R</kbd> 反向搜索历史</li>
+          <li><kbd>Ctrl</kbd><kbd>T</kbd> 在线思路中打开提示</li>
+          <li><kbd>Ctrl</kbd><kbd>B</kbd> 后台运行任务</li>
+          <li><kbd>Ctrl</kbd><kbd>V</kbd> 粘贴图片</li>
+          <li><kbd>Esc</kbd><kbd>Esc</kbd> 回退/撤销</li>
         </ul>
-      </article>
-      <article class="panel safe">
-        <p class="kicker">SECURITY</p>
-        <h2>安全与使用建议</h2>
+      </div>
+      <div class="subgroup">
+        <h3>模式切换</h3>
         <ul>
-          <li>Bot Token 不要外传</li>
-          <li>建议将 DM 策略切到 allowlist</li>
-          <li>电脑需保持开机，网络稳定</li>
-          <li>后台常驻优先用 tmux</li>
+          <li><kbd>Shift</kbd><kbd>Tab</kbd> 循环切换权限模式</li>
+          <li><kbd>Alt</kbd><kbd>P</kbd> 切换提问</li>
+          <li><kbd>Alt</kbd><kbd>T</kbd> 切换思考模式</li>
         </ul>
-      </article>
+      </div>
+      <div class="subgroup">
+        <h3>执行</h3>
+        <ul>
+          <li><kbd>\</kbd><kbd>Enter</kbd> 快捷执行</li>
+          <li><kbd>Ctrl</kbd><kbd>J</kbd> 按顺序执行</li>
+        </ul>
+      </div>
+      <div class="subgroup">
+        <h3>会话选择器</h3>
+        <ul>
+          <li><kbd>↑↓</kbd> 导航</li>
+          <li><kbd>↵</kbd> 展开/折叠</li>
+          <li><kbd>P</kbd> 预览</li>
+          <li><kbd>R</kbd> 重命名</li>
+          <li><kbd>/</kbd> 搜索</li>
+          <li><kbd>A</kbd> 所有项目</li>
+          <li><kbd>B</kbd> 当前分支</li>
+        </ul>
+      </div>
+      <div class="subgroup accent-cyan">
+        <h3>🔌 MCP 服务端</h3>
+        <ul>
+          <li><code>--transport http</code> 远程 HTTP（推荐）</li>
+          <li><code>--transport stdio</code> 本地进程</li>
+          <li><code>--transport sse</code> 远程 SSE</li>
+          <li>作用域：Local / Project / User</li>
+          <li><code>/mcp</code> 交互式界面</li>
+          <li><code>claude mcp list</code> 列出服务端</li>
+          <li><code>claude mcp serve</code> 作为服务暴露</li>
+        </ul>
+      </div>
     </section>
 
-    <section class="section sources">
-      <div class="section-head">
-        <p class="kicker">LINKS</p>
-        <h2>相关链接</h2>
+    <section class="card purple">
+      <h2>⚡ 斜杠命令</h2>
+      <div class="subgroup">
+        <h3>会话</h3>
+        <ul>
+          <li><code>/clear</code> 清除对话</li>
+          <li><code>/compact [focus]</code> 压缩上下文</li>
+          <li><code>/resume</code> 恢复/切换会话</li>
+          <li><code>/branch [name]</code> 分支对话</li>
+          <li><code>/cost</code> 查看成本</li>
+          <li><code>/context</code> 可视化上下文</li>
+          <li><code>/diff</code> 变更差异预览</li>
+          <li><code>/export</code> 导出对话</li>
+        </ul>
       </div>
-      <div class="link-list">
-        <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noreferrer">Claude Code 官方文档</a>
-        <a href="https://t.me/botfather" target="_blank" rel="noreferrer">Telegram BotFather</a>
-        <a href="https://openclaw.com" target="_blank" rel="noreferrer">OpenClaw 官网</a>
+      <div class="subgroup">
+        <h3>配置</h3>
+        <ul>
+          <li><code>/config</code> 打开设置</li>
+          <li><code>/model [model]</code> 切换模型（+ 努力度）</li>
+          <li><code>/fast [on|off]</code> 切换快捷模式</li>
+          <li><code>/theme</code> 更改颜色主题</li>
+          <li><code>/permissions</code> 查看/更新权限</li>
+          <li><code>/effort [level]</code> 设置努力度</li>
+          <li><code>/color [color]</code> 设置提示栏颜色</li>
+        </ul>
+      </div>
+      <div class="subgroup">
+        <h3>工具</h3>
+        <ul>
+          <li><code>/init</code> 创建 CLAUDE.md</li>
+          <li><code>/memory</code> 编辑 CLAUDE.md 文件</li>
+          <li><code>/mcp</code> 管理 MCP 服务</li>
+          <li><code>/hooks</code> 管理钩子</li>
+          <li><code>/skills</code> 列出可用技能</li>
+          <li><code>/agents</code> 管理代理</li>
+          <li><code>/chrome</code> Chrome 集成</li>
+          <li><code>/reload-plugins</code> 热重载插件</li>
+        </ul>
+      </div>
+      <div class="subgroup">
+        <h3>特殊</h3>
+        <ul>
+          <li><code>/btw &lt;question&gt;</code> 附带提问</li>
+          <li><code>/plan [desc]</code> 计划模式</li>
+          <li><code>/loop [interval]</code> 周期性任务</li>
+          <li><code>/voice</code> 语音模式</li>
+          <li><code>/doctor</code> 诊断疑难问题</li>
+          <li><code>/rc</code> 启用配置控制</li>
+          <li><code>/pr-comments [PR]</code> 获取 PR 评论</li>
+          <li><code>/status</code> 使用监控</li>
+          <li><code>/insights</code> 分析会话报告</li>
+          <li><code>/desktop</code> 桌面应用</li>
+        </ul>
+      </div>
+      <div class="subgroup accent-orange">
+        <h3>🧠 记忆与文件</h3>
+        <ul>
+          <li><strong>CLAUDE.md</strong>：<code>./CLAUDE.md</code> / <code>~/.claude/CLAUDE.md</code></li>
+          <li>规则来源：<code>.claude/rules/*.md</code></li>
+          <li>自动记忆：<code>~/.claude/projects/&lt;project&gt;/memory/</code></li>
+          <li><code>MEMORY.md</code> + 主题文件自动加载</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card red">
+      <h2>🧰 工作流与技巧</h2>
+      <div class="subgroup">
+        <h3>计划模式</h3>
+        <ul>
+          <li><kbd>Shift</kbd><kbd>Tab</kbd>：Normal → Auto → Plan</li>
+          <li><code>--permission-mode plan</code> 计划模式启动</li>
+          <li><code>ultrathink</code>：当前轮次最大努力度</li>
+          <li><kbd>Alt</kbd><kbd>T</kbd>：快提/平衡/深入</li>
+          <li><kbd>Ctrl</kbd><kbd>O</kbd>：查看思考</li>
+          <li><code>/effort low · med · high</code></li>
+        </ul>
+      </div>
+      <div class="subgroup">
+        <h3>Git Worktree</h3>
+        <ul>
+          <li><code>--worktree name</code> 每个功能独立分支</li>
+          <li><code>isolation: worktree</code> 让代理跑在独立 worktree</li>
+          <li><code>sparsePaths</code> 仅检出所需目录</li>
+          <li><code>/batch</code> 自动创建 worktrees</li>
+        </ul>
+      </div>
+      <div class="subgroup">
+        <h3>语音模式</h3>
+        <ul>
+          <li><code>/voice</code> 启用语音对话</li>
+          <li><kbd>Space</kbd>（hold）录音，释放发送</li>
+          <li>20+ 语言：EN/ES/FR/DE/CZ/PL…</li>
+        </ul>
+      </div>
+      <div class="subgroup">
+        <h3>上下文管理</h3>
+        <ul>
+          <li><code>/context</code> 用量 + 优化建议</li>
+          <li><code>/compact [focus]</code> 智能压缩</li>
+          <li><code>Auto-compact</code> 95% 自动触发</li>
+          <li>1M context / Opus 4.6 (Max/Team/Ent)</li>
+        </ul>
+      </div>
+      <div class="subgroup">
+        <h3>会话/SDK</h3>
+        <ul>
+          <li><code>claude -c</code> 继续上次对话</li>
+          <li><code>claude -r "name"</code> 按名称恢复</li>
+          <li><code>/btw</code> 无上下文开新聊</li>
+          <li><code>claude -p "query"</code> 非交互式</li>
+          <li><code>--output-format json</code> 结构化输出</li>
+          <li><code>cat file | claude -p</code> 管道输入</li>
+        </ul>
+      </div>
+      <div class="subgroup accent-orange">
+        <h3>📦 配置与环境</h3>
+        <ul>
+          <li><code>~/.claude/settings.json</code> 用户设置</li>
+          <li><code>.claude/settings.json</code> 项目设置</li>
+          <li><code>.claude/settings.local.json</code> 本地设置</li>
+          <li><code>.mcp.json</code> 项目 MCP 服务</li>
+          <li><code>ANTHROPIC_API_KEY</code> / <code>ANTHROPIC_MODEL</code></li>
+          <li><code>CLAUDE_CODE_EFFORT_LEVEL</code></li>
+          <li><code>MAX_THINKING_TOKENS</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card green">
+      <h2>🧩 技能与代理</h2>
+      <div class="subgroup">
+        <h3>内置技能</h3>
+        <ul>
+          <li><code>/simplify</code> 代码审查（3 个并行代理）</li>
+          <li><code>/batch</code> 大规模并行修改</li>
+          <li><code>/debug [desc]</code> 调试日志排查问题</li>
+          <li><code>/loop [interval]</code> 周期性调度任务</li>
+          <li><code>/claude-api</code> 加载 API / SDK 参考</li>
+        </ul>
+      </div>
+      <div class="subgroup">
+        <h3>自定义技能</h3>
+        <ul>
+          <li><code>.claude/skills/&lt;name&gt;/</code> 项目技能</li>
+          <li><code>~/.claude/skills/&lt;name&gt;/</code> 个人技能</li>
+          <li><code>description</code> 自动调用触发器</li>
+          <li><code>allowed-tools</code> 限制权限</li>
+          <li><code>model</code> 覆盖技能模型</li>
+          <li><code>effort</code> 覆盖努力度</li>
+          <li><code>context: fork</code> 子代理独立记忆</li>
+        </ul>
+      </div>
+      <div class="subgroup">
+        <h3>内置代理</h3>
+        <ul>
+          <li><strong>Explore</strong> 快速只读</li>
+          <li><strong>Plan</strong> 计划模式研究</li>
+          <li><strong>General</strong> 主流程</li>
+          <li><strong>Bash</strong> 终端独立上下文</li>
+        </ul>
+      </div>
+      <div class="subgroup">
+        <h3>代理覆盖参数</h3>
+        <ul>
+          <li><code>permissionMode</code> default/acceptEdits/dontAsk/plan</li>
+          <li><code>isolation</code> worktree / git worktree</li>
+          <li><code>memory</code> user|project 持久化记忆</li>
+          <li><code>background: true</code> 后台任务</li>
+          <li><code>maxTurns</code> 限制轮次</li>
+          <li><code>SendMessage</code> 唤起代理（替代 resume）</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card slate cli-card">
+      <h2>🖥️ CLI 与标志</h2>
+      <div class="columns two">
+        <ul>
+          <li><code>claude</code> 交互式</li>
+          <li><code>claude -q</code> 带提示</li>
+          <li><code>claude -p</code> 无头模式</li>
+          <li><code>claude -c</code> 继续上次</li>
+          <li><code>claude -r</code> 恢复</li>
+          <li><code>claude update</code> 更新</li>
+        </ul>
+        <ul>
+          <li><code>--model</code> 设模型</li>
+          <li><code>-w</code> Git worktree</li>
+          <li><code>-n / --name</code> 会话名</li>
+          <li><code>--add-dir</code> 加目录</li>
+          <li><code>--agent</code> 使用代理</li>
+          <li><code>--allowedTools</code> 预批准</li>
+          <li><code>--output-format</code> json/stream</li>
+          <li><code>--json-schema</code> 结构化</li>
+          <li><code>--max-turns</code> 限制轮次</li>
+          <li><code>--max-budget-usd</code> 费用上限</li>
+          <li><code>--console</code> Anthropic Console 认证</li>
+          <li><code>--verbose</code> 详细模式</li>
+          <li><code>--bare</code> 最小化无头</li>
+          <li><code>--channels</code> 权限中枢 / MCP 推送</li>
+          <li><code>--remote</code> Web 会话</li>
+          <li><code>--chrome</code> Chrome</li>
+        </ul>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p>Made for fast recall · Editorial dark layout · Responsive single-page reference</p>
+  <footer class="footer wrap">
+    <div class="envline">
+      <span>权限模式：default / acceptEdits / plan / dontAsk / bypassPermissions</span>
+      <span>常见环境变量：ANTHROPIC_API_KEY / ANTHROPIC_MODEL / CLAUDE_CODE_EFFORT_LEVEL / MAX_THINKING_TOKENS / CLAUDE_CODE_MAX_OUTPUT_TOKENS / CLAUDE_CODE_DISABLE_CRON</span>
+    </div>
   </footer>
 </body>
 </html>
